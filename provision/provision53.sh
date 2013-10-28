@@ -49,11 +49,17 @@ if [ ! -L /etc/apache2/mods-enabled/rewrite.load ]; then
 fi
 
 # load vhosts
-ln -sf /srv/config/apache-config/apachehosts.vhost /etc/apache2/sites-enabled/wp
-echo " * /srv/config/apache-config/apachehosts.vhost -> /etc/apache2/sites-enabled/wp"
+HOSTFILES=/srv/config/apache-config/*
+for f in $HOSTFILES
+do
+	filename=$(basename "$f")
+	filename=${filename%.*}
+    sudo ln -sf $f /etc/apache2/sites-enabled/$filename
+    echo " * $f -> /etc/apache2/sites-enabled/$filename"
+done
 
 # symlink www
-sudo ln -s /var/www /srv/www
+# sudo ln -s /var/www /srv/www
 
 # install composer
 bash /vagrant/provision/install-composer.sh
@@ -291,8 +297,7 @@ DOMAINS='vvv.dev
          local.wordpress.dev
          local.wordpress-trunk.dev
          src.wordpress-develop.dev
-         build.wordpress-develop.dev
-         wp.dev'
+         build.wordpress-develop.dev'
 
 if ! grep -q "$DOMAINS" /etc/hosts
 then

@@ -6,60 +6,6 @@ vagrant_dir = File.expand_path(File.dirname(__FILE__))
 
 Vagrant.configure("2") do |config|
 
-  # The below is separating our provision files depending on what configuration we want when starting "vagrant up".  To start this provision you do "vagrant up php54" or just "vagrant up".
-  config.vm.define "php54", primary: true do |php54|
-    # Provisioning
-    #
-    # Process one or more provisioning scripts depending on the existence of custom files.
-    #
-    # provison-pre.sh acts as a pre-hook to our default provisioning script. Anything that
-    # should run before the shell commands laid out in provision.sh (or your provision-custom.sh
-    # file) should go in this script. If it does not exist, no extra provisioning will run.
-    if File.exists?(File.join(vagrant_dir,'provision','provision-pre.sh')) then
-      php54.vm.provision :shell, :path => File.join( "provision", "provision-pre.sh" )
-    end
-
-    # provision.sh or provision-custom.sh
-    #
-    # By default, Vagrantfile is set to use the provision.sh bash script located in the
-    # provision directory. If it is detected that a provision-custom.sh script has been
-    # created, that is run as a replacement. This is an opportunity to replace the entirety
-    # of the provisioning provided by default.
-    if File.exists?(File.join(vagrant_dir,'provision','provision-custom.sh')) then
-      php54.vm.provision :shell, :path => File.join( "provision", "provision-custom.sh" )
-    else
-      php54.vm.provision :shell, :path => File.join( "provision", "provision.sh" )
-    end
-
-    # provision-post.sh acts as a post-hook to the default provisioning. Anything that should
-    # run after the shell commands laid out in provision.sh or provision-custom.sh should be
-    # put into this file. This provides a good opportunity to install additional packages
-    # without having to replace the entire default provisioning script.
-    if File.exists?(File.join(vagrant_dir,'provision','provision-post.sh')) then
-      php54.vm.provision :shell, :path => File.join( "provision", "provision-post.sh" )
-    end
-  end
-
-
-  # This provisions php53 installation on apache using "vagrant up php53"
-  config.vm.define "php53" do |php53|
-   
-    if File.exists?(File.join(vagrant_dir,'provision','provision-pre-53.sh')) then
-      php53.vm.provision :shell, :path => File.join( "provision", "provision-pre-53.sh" )
-    end
-
-    if File.exists?(File.join(vagrant_dir,'provision','provision-custom-53.sh')) then
-      php53.vm.provision :shell, :path => File.join( "provision", "provision-custom-53.sh" )
-    else
-      php53.vm.provision :shell, :path => File.join( "provision", "provision53.sh" )
-    end
-
-    if File.exists?(File.join(vagrant_dir,'provision','provision-post-53.sh')) then
-      php53.vm.provision :shell, :path => File.join( "provision", "provision-post-53.sh" )
-    end
-
-  end
-
   # Store the current version of Vagrant for use in conditionals when dealing
   # with possible backward compatible issues.
   vagrant_version = Vagrant::VERSION.sub(/^v/, '')
@@ -101,7 +47,7 @@ Vagrant.configure("2") do |config|
       "local.wordpress-trunk.dev",
       "src.wordpress-develop.dev",
       "build.wordpress-develop.dev"
-      ]
+    ]
   end
 
   # Default Box IP Address
@@ -173,5 +119,36 @@ Vagrant.configure("2") do |config|
   # different provisioning, then you may want to consider a new Vagrantfile entirely.
   if File.exists?(File.join(vagrant_dir,'Customfile')) then
     eval(IO.read(File.join(vagrant_dir,'Customfile')), binding)
+  end
+
+  # Provisioning
+  #
+  # Process one or more provisioning scripts depending on the existence of custom files.
+  #
+  # provison-pre.sh acts as a pre-hook to our default provisioning script. Anything that
+  # should run before the shell commands laid out in provision.sh (or your provision-custom.sh
+  # file) should go in this script. If it does not exist, no extra provisioning will run.
+  if File.exists?(File.join(vagrant_dir,'provision','provision-pre.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision-pre.sh" )
+  end
+
+  # provision.sh or provision-custom.sh
+  #
+  # By default, Vagrantfile is set to use the provision.sh bash script located in the
+  # provision directory. If it is detected that a provision-custom.sh script has been
+  # created, that is run as a replacement. This is an opportunity to replace the entirety
+  # of the provisioning provided by default.
+  if File.exists?(File.join(vagrant_dir,'provision','provision-custom.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision-custom.sh" )
+  else
+    config.vm.provision :shell, :path => File.join( "provision", "provision.sh" )
+  end
+
+  # provision-post.sh acts as a post-hook to the default provisioning. Anything that should
+  # run after the shell commands laid out in provision.sh or provision-custom.sh should be
+  # put into this file. This provides a good opportunity to install additional packages
+  # without having to replace the entire default provisioning script.
+  if File.exists?(File.join(vagrant_dir,'provision','provision-post.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision-post.sh" )
   end
 end
