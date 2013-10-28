@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
     if File.exists?(File.join(vagrant_dir,'provision','provision-custom-53.sh')) then
       php53.vm.provision :shell, :path => File.join( "provision", "provision-custom-53.sh" )
     else
-      php53.vm.provision :shell, :path => File.join( "provision", "provision53.sh" )
+      php53.vm.provision :shell, :path => File.join( "provision", "provision-53.sh" )
     end
 
     if File.exists?(File.join(vagrant_dir,'provision','provision-post-53.sh')) then
@@ -101,7 +101,8 @@ Vagrant.configure("2") do |config|
       "local.wordpress-trunk.dev",
       "src.wordpress-develop.dev",
       "build.wordpress-develop.dev"
-      ]
+      "wp.dev"
+    ]
   end
 
   # Default Box IP Address
