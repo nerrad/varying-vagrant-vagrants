@@ -1,3 +1,33 @@
+#Varying Vagrant Vagrants Apache
+
+Varying Vagrant Vagrants Apache simply adds an apache/PHP5.3 box to VVV.  Pretty much follows the same provisioning except using apache and PHP5.3 instead of nginx and PHP5.4
+
+The neat thing about this fork, is you can do this:
+
+`vagrant up php54` 
+**loads up the original VVV***
+
+OR
+
+`vagrant up php53`
+**loads up the new apache and php53 VVV***
+
+In both cases, the same /www/ folders/file setups, and databases are used.
+
+How?  [Via this](http://docs.vagrantup.com/v2/multi-machine/index.html)
+
+I also used some provisioning instructions from https://github.com/ifeelweb/ifwWordPressDevEnvironment and mish mashed what was included with VVV.
+
+*NOTE*: this is very hackish as I'm NOT a server guru.  I just wanted to get a way to do development on either apache 5.3/PHP5.3 or the default nginx/PHP5.4 setups.
+
+Some other important things:
+
+* I've modified the Vagrantfile to do this. If someone can come up with a better way then I'm game.  Currently it appears that VVV only allows one to append a custom file, not overwrite the default.
+* the default provision is in the original file.  The provisioning stuff for apache/php5.3 is found in `provision53.sh`. You can still have custom pre and post provision scripts.  Usage is the same as the original except you prepend "-53" to the script name (i.e. `provision-pre-53.sh` or `provision-post-53.sh`)
+* custom db imports/site setup works the same as default VVV however, you will want to make any modifications to the "Virtual Hosts" for any custom domains.  To do so go to `config/apache-config/apachehosts.vhost` and add in your VirtualHost instructions in there.
+* **DO NOT** have both boxes running at the same time.  While it's possible to start them both up, they are both setup to share the same domains/ip address and obviously that will make things not work.  So don't blow up the universe.  Just use one box at a time (get familiar with `vagrant suspend` and `vagrant resume`)
+
+
 # Varying Vagrant Vagrants
 
 Varying Vagrant Vagrants is an evolving [Vagrant](http://vagrantup.com) configuration focused on [WordPress](http://wordpress.org) development.
