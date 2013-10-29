@@ -26,6 +26,14 @@ Some other important things:
 * the default provision is in the original file.  The provisioning stuff for apache/php5.3 is found in `provision53.sh`. You can still have custom pre and post provision scripts.  Usage is the same as the original except you prepend "-53" to the script name (i.e. `provision-pre-53.sh` or `provision-post-53.sh`)
 * custom db imports/site setup works the same as default VVV however, you will want to make any modifications to the "Virtual Hosts" for any custom domains.  To do so go to `config/apache-config/apachehosts.vhost` and add in your VirtualHost instructions in there.
 * **DO NOT** have both boxes running at the same time.  While it's possible to start them both up, they are both setup to share the same domains/ip address and obviously that will make things not work.  So don't blow up the universe.  Just use one box at a time (get familiar with `vagrant suspend` and `vagrant resume`)
+* for an example of how to setup a domain that works with multiple subdirectories (for fast provisioning of multiple wp installs, see what i did with the wp.dev domain).  Note, that if you add a sub-folder to the /www/ directory and install wordpress in it then `wp.dev/sub-folder/` will automatically work with apache/php53 for permalinks.  Permalinks will also work with the nginx setup, however you do have to add the subdirectory to `config/nginx-config/sites/wp.dev.conf/` using the same format in there as what I've already put in there. Make sure you either re provision your vm or restart the nginx service after your change.
+
+### How can you help?
+
+Here's a point list of things that I'd love help from folks on implementing:
+
+* Make it so you can add multiple WordPress versions installed in subdirectories to the /www/ root without requiring any edits of nginx.conf to get the permalinks working for those dirs when accessed via the same domain.
+* It'd be nice to have an apache/PHP5.2 box for being able to test on.  But what would be nicer is if WP just dropped support for PHP5.2!
 
 
 # Varying Vagrant Vagrants
