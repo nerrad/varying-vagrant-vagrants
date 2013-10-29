@@ -25,8 +25,14 @@ sudo apt-get update
 sudo apt-get -y install apache2
 sudo sh -c 'echo "ServerName localhost" >> /etc/apache2/conf.d/name'
 
-echo mysql-server-5.5 mysql-server/root_password password blank | sudo debconf-set-selections
-echo mysql-server-5.5 mysql-server/root_password_again password blank | sudo debconf-set-selections
+# MySQL
+#
+# Use debconf-set-selections to specify the default password for the root MySQL
+# account. This runs on every provision, even if MySQL has been installed. If
+# MySQL is already installed, it will not affect anything. 
+echo mysql-server mysql-server/root_password password root | debconf-set-selections
+echo mysql-server mysql-server/root_password_again password root | debconf-set-selections
+
 sudo apt-get -y install mysql-server
 
 sudo apt-get -y install php5

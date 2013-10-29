@@ -11,9 +11,9 @@
         </Directory>
         <Directory /srv/www>
                 Options Indexes FollowSymLinks MultiViews
-                AllowOverride None
+                AllowOverride All
                 Order allow,deny
-                allow from all
+                Allow from all
         </Directory>
 
         ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/

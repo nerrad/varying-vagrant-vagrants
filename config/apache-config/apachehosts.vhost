@@ -4,12 +4,12 @@
         ServerName vvv.dev
         ServerAlias vvv.dev *.vvv.dev
 
-        DocumentRoot /srv/www/default/
+        DocumentRoot /srv/www/default
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None
         </Directory>
-        <Directory /srv/www/default/>
+        <Directory /srv/www/default>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride None
                 Order allow,deny
@@ -40,12 +40,12 @@
         ServerName local.wordpress.dev
         ServerAlias local.wordpress.dev *.local.wordpress.dev
 
-        DocumentRoot /srv/www/wordpress-default/
+        DocumentRoot /srv/www/wordpress-default
         <Directory />
                 Options FollowSymLinks
-                AllowOverride All
+                AllowOverride None
         </Directory>
-        <Directory /srv/www/wordpress-default/>
+        <Directory /srv/www/wordpress-default>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride All
                 Order allow,deny
@@ -75,12 +75,12 @@
         ServerName local.wordpress-trunk.dev
         ServerAlias local.wordpress-trunk.dev *.local.wordpress.dev
 
-        DocumentRoot /srv/www/wordpress-trunk/
+        DocumentRoot /srv/www/wordpress-trunk
         <Directory />
                 Options FollowSymLinks
-                AllowOverride All
+                AllowOverride None
         </Directory>
-        <Directory /srv/www/wordpress-trunk/>
+        <Directory /srv/www/wordpress-trunk>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride All
                 Order allow,deny
@@ -110,12 +110,12 @@
         ServerName src.wordpress-develop.dev
         ServerAlias src.wordpress-develop.dev *.src.wordpress-develop.dev
 
-        DocumentRoot /srv/www/wordpress-develop/src/
+        DocumentRoot /srv/www/wordpress-develop/src
         <Directory />
                 Options FollowSymLinks
-                AllowOverride All
+                AllowOverride None
         </Directory>
-        <Directory /srv/www/wordpress-develop/src/>
+        <Directory /srv/www/wordpress-develop/src>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride All
                 Order allow,deny
@@ -144,12 +144,12 @@
         ServerName build.wordpress-develop.dev
         ServerAlias build.wordpress-develop.dev *.build.wordpress-develop.dev
 
-        DocumentRoot /srv/www/wordpress-develop/build/
+        DocumentRoot /srv/www/wordpress-develop/build
         <Directory />
                 Options FollowSymLinks
-                AllowOverride All
+                AllowOverride None
         </Directory>
-        <Directory /srv/www/wordpress-develop/build/>
+        <Directory /srv/www/wordpress-develop/build>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride All
                 Order allow,deny
