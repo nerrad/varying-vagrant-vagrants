@@ -1,4 +1,6 @@
-#Varying Vagrant Vagrants Apache
+Note:  This repository is no longer actively maintained and likely won't work as expected for your needs. Feel free to fork it and play around with it if needed but it's considered a dead project.
+
+## Varying Vagrant Vagrants Apache
 
 Varying Vagrant Vagrants Apache simply adds an apache/PHP5.3 box to VVV.  Pretty much follows the same provisioning except using apache and PHP5.3 instead of nginx and PHP5.4
 
