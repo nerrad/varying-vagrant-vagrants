@@ -1,4 +1,4 @@
-Note:  This repository is no longer actively maintained and likely won't work as expected for your needs. Feel free to fork it and play around with it if needed but it's considered a dead project.
+> Note:  This repository is no longer actively maintained and likely won't work as expected for your needs. Feel free to fork it and play around with it if needed but it's considered a dead project.
 
 ## Varying Vagrant Vagrants Apache
 
